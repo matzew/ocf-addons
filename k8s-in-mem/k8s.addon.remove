@@ -1,0 +1,12 @@
+# Name: k8s-in-mem
+# Description: Remove k8s-in-mem, duh
+
+oc adm policy remove-scc-from-user anyuid -z default -n myproject
+oc adm policy remove-scc-from-user privileged -z default -n myproject
+oc adm policy remove-scc-from-user anyuid -z events-sa -n myproject
+oc adm policy remove-scc-from-user privileged -z events-sa -n myproject
+oc adm policy remove-scc-from-user anyuid -z default -n myproject
+oc adm policy remove-scc-from-user privileged -z default -n myproject
+
+!oc delete -f https://raw.githubusercontent.com/openshift-cloud-functions/knative-operators/d2bbb3553951590e7727f14ead229900429fd2b8/etc/upstream/knative-eventing-0.2.0.yaml
+!oc delete -f https://raw.githubusercontent.com/openshift-cloud-functions/knative-operators/d2bbb3553951590e7727f14ead229900429fd2b8/etc/upstream/knative-eventing-sources-0.2.0.yaml

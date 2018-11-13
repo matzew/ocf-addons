@@ -1,0 +1,20 @@
+# Name: k8s-in-mem
+# Description: k8s-in-mem, duh
+# OpenShift-Version: >=3.11.0
+# Minishift-Version: >=1.25.0
+# Depends-On: anyuid, istio
+
+## ADM policies...
+oc adm policy add-scc-to-user anyuid -z default -n myproject
+oc adm policy add-scc-to-user privileged -z default -n myproject
+oc adm policy add-scc-to-user anyuid -z events-sa -n myproject
+oc adm policy add-scc-to-user privileged -z events-sa -n myproject
+oc adm policy add-scc-to-user anyuid -z default -n myproject
+oc adm policy add-scc-to-user privileged -z default -n myproject
+
+## A prepared k8s source
+oc apply -f https://gist.githubusercontent.com/matzew/8932b8dabfdbdff0ffc9012c24cac2c9/raw/cc6c25ab7b044d2214bfe8a238801afcd88faca0/k8s-sample.yaml
+
+# Wait up to 5 minutes for all pods to be ready
+token := oc sa get-token deployer -n myproject
+ssh timeout 300 bash -c -- 'while curl -s -k -H "Authorization: Bearer #{token}" https://#{ip}:8443/api/v1/namespaces/myproject/pods | grep phase | grep -v -E "(Running|Succeeded)"; do sleep 5; done'
