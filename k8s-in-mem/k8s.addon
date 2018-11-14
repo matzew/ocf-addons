@@ -2,7 +2,7 @@
 # Description: k8s-in-mem, duh
 # OpenShift-Version: >=3.11.0
 # Minishift-Version: >=1.25.0
-# Depends-On: anyuid, istio
+# Depends-On: anyuid
 
 ## ADM policies...
 oc adm policy add-scc-to-user anyuid -z default -n myproject
