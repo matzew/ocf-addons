@@ -7,9 +7,9 @@
 # Var-Defaults: KNATIVE_EVENTING_VERSION=v0.2.0
 
 ## temporary installing Strimzi
-###oc apply -f https://github.com/strimzi/strimzi-kafka-operator/releases/download/0.8.2/strimzi-cluster-operator-0.8.2.yaml
+oc apply -f https://github.com/strimzi/strimzi-kafka-operator/releases/download/0.8.2/strimzi-cluster-operator-0.8.2.yaml
 # Simple Cluster with one ZK and one Kafka node
-###oc apply -f https://gist.githubusercontent.com/matzew/a57485deff91591a442dcf6c7ab16c87/raw/f908e91a66d6fc79a20c5988890d493b2bbf8eb0/strimzi.yaml
+oc apply -f https://gist.githubusercontent.com/matzew/a57485deff91591a442dcf6c7ab16c87/raw/f908e91a66d6fc79a20c5988890d493b2bbf8eb0/strimzi.yaml
 
 # To avoid an error when removing
 oc annotate clusterrolebinding.rbac cluster-admin 'rbac.authorization.kubernetes.io/autoupdate=false' --overwrite
